@@ -10,10 +10,10 @@ import com.giordano.presentation.controller.MainController;
 
 import java.util.Objects;
 
-public class Application {
-    protected static DataComponent dataComponent;
-    protected static DomainComponent domainComponent;
-    protected static PresentationComponent presentationComponent;
+class Application {
+    static DataComponent dataComponent;
+    static DomainComponent domainComponent;
+    static PresentationComponent presentationComponent;
 
     private DataComponent getDataComponent() {
         if(Objects.isNull(dataComponent))
@@ -39,7 +39,7 @@ public class Application {
         return presentationComponent;
     }
 
-    protected Application() {
+    Application() {
         dataComponent = getDataComponent();
         domainComponent = getDomainComponent(dataComponent);
         presentationComponent = getPresentationComponent(domainComponent);
