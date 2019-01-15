@@ -4,6 +4,6 @@ import com.giordano.domain.model.PayReport;
 
 import java.util.List;
 
-public interface WorkReportService {
-    List<PayReport> getPayReports();
+public interface PayReportService {
+    List<PayReport> getAllPayReports();
 }

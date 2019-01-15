@@ -1,13 +1,17 @@
 package com.giordano.data;
 
 import com.giordano.MockApplication;
+import com.giordano.common.BaseTest;
+import com.giordano.data.model.WorkReport;
 import com.giordano.data.repository.WorkReportRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
-public class WorkReportRepositoryTests {
+public class WorkReportRepositoryTest  extends BaseTest {
     private WorkReportRepository workReportRepository;
 
     @Before
@@ -17,8 +21,8 @@ public class WorkReportRepositoryTests {
     }
 
     @Test
-    public void requestedPayTableEqualsToExpected() {
-        workReportRepository.getAllWorkReport();
-        assertEquals(0, 0);
+    public void requestedPayTableEqualsToExpectedTest() {
+        List<WorkReport> expectedMockReports = MockData.getMockWorkReports();
+        assertEquals(expectedMockReports, workReportRepository.getAllWorkReport());
     }
 }

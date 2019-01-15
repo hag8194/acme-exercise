@@ -1,6 +1,7 @@
 package com.giordano.data.model;
 
 import java.time.LocalTime;
+import java.util.Objects;
 
 public class WorkedSchedule {
     private Day day;
@@ -17,23 +18,26 @@ public class WorkedSchedule {
         return day;
     }
 
-    public void setDay(Day day) {
-        this.day = day;
-    }
-
     public LocalTime getTimeStart() {
         return timeStart;
-    }
-
-    public void setTimeStart(LocalTime timeStart) {
-        this.timeStart = timeStart;
     }
 
     public LocalTime getTimeEnd() {
         return timeEnd;
     }
 
-    public void setTimeEnd(LocalTime timeEnd) {
-        this.timeEnd = timeEnd;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkedSchedule that = (WorkedSchedule) o;
+        return day == that.day &&
+            timeStart.equals(that.timeStart) &&
+            timeEnd.equals(that.timeEnd);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(day, timeStart, timeEnd);
     }
 }

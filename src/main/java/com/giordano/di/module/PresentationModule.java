@@ -1,21 +1,21 @@
 package com.giordano.di.module;
 
 import com.giordano.di.component.DomainComponent;
-import com.giordano.presentation.controller.MainController;
+import com.giordano.presentation.controller.PayReportController;
 
 import java.util.Objects;
 
 public class PresentationModule extends Module {
     private DomainModule domainModule;
-    private MainController mainController;
+    private PayReportController payReportController;
 
     public PresentationModule(DomainComponent domainComponent) {
         this.domainModule = domainComponent.getDomainModule();
     }
 
-    public MainController provideMainController() {
-        if(Objects.isNull(mainController))
-            mainController = new MainController(domainModule.provideWorkReportService());
-        return mainController;
+    public PayReportController provideMainController() {
+        if(Objects.isNull(payReportController))
+            payReportController = new PayReportController(domainModule.provideWorkReportService());
+        return payReportController;
     }
 }

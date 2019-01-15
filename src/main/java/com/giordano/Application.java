@@ -6,7 +6,7 @@ import com.giordano.di.component.PresentationComponent;
 import com.giordano.di.module.DataModule;
 import com.giordano.di.module.DomainModule;
 import com.giordano.di.module.PresentationModule;
-import com.giordano.presentation.controller.MainController;
+import com.giordano.presentation.controller.PayReportController;
 
 import java.util.Objects;
 
@@ -47,7 +47,7 @@ class Application {
 
     void start() {
         PresentationModule presentationModule = presentationComponent.getPresentationModule();
-        MainController mainController = presentationModule.provideMainController();
-        mainController.generatePayReport();
+        PayReportController payReportController = presentationModule.provideMainController();
+        payReportController.generatePayReport();
     }
 }

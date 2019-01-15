@@ -2,7 +2,7 @@ package com.giordano.di.component;
 
 import com.giordano.di.module.DataModule;
 
-public class DataComponent extends Component {
+public class DataComponent {
     private DataModule dataModule;
 
     private DataComponent(DataModule dataModule) {

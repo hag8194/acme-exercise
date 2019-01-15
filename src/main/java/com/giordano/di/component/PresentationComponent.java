@@ -2,18 +2,12 @@ package com.giordano.di.component;
 
 import com.giordano.di.module.PresentationModule;
 
-public class PresentationComponent extends Component {
+public class PresentationComponent {
 
-    private DomainComponent domainComponent;
     private PresentationModule presentationModule;
 
-    private PresentationComponent(DomainComponent domainComponent, PresentationModule presentationModule) {
-        this.domainComponent = domainComponent;
+    private PresentationComponent(PresentationModule presentationModule) {
         this.presentationModule = presentationModule;
-    }
-
-    public DomainComponent getDomainComponent() {
-        return domainComponent;
     }
 
     public PresentationModule getPresentationModule() {
@@ -21,13 +15,7 @@ public class PresentationComponent extends Component {
     }
 
     public static class Builder {
-        private DomainComponent domainComponent;
         private PresentationModule presentationModule;
-
-        public Builder setDomainComponent(DomainComponent domainComponent) {
-            this.domainComponent = domainComponent;
-            return this;
-        }
 
         public Builder setPresentationModule(PresentationModule presentationModule) {
             this.presentationModule = presentationModule;
@@ -35,7 +23,7 @@ public class PresentationComponent extends Component {
         }
 
         public PresentationComponent build() {
-            return new PresentationComponent(domainComponent, presentationModule);
+            return new PresentationComponent(presentationModule);
         }
     }
 }

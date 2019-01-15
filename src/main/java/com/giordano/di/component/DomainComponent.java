@@ -2,7 +2,7 @@ package com.giordano.di.component;
 
 import com.giordano.di.module.DomainModule;
 
-public class DomainComponent extends Component {
+public class DomainComponent {
 
     private DomainModule domainModule;
 

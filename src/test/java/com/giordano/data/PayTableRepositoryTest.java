@@ -1,6 +1,7 @@
 package com.giordano.data;
 
 import com.giordano.MockApplication;
+import com.giordano.common.BaseTest;
 import com.giordano.data.model.PayTable;
 import com.giordano.data.repository.PayTableRepository;
 import org.junit.Before;
@@ -8,7 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class PayTableRepositoryTests {
+public class PayTableRepositoryTest  extends BaseTest {
     private PayTableRepository payTableRepository;
 
     @Before
@@ -18,7 +19,7 @@ public class PayTableRepositoryTests {
     }
 
     @Test
-    public void requestedPayTableEqualsToExpected() {
+    public void requestedPayTableEqualsToExpectedTest() {
         PayTable expectedPayTable = MockData.getMockPayTable();
         assertEquals(expectedPayTable, payTableRepository.getPayTable());
     }
