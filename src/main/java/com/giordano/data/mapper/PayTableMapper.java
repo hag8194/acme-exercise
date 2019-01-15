@@ -8,34 +8,29 @@ import static com.giordano.data.utils.MapperUtils.*;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PayTableMapper {
 
-    private PayLine generatePayLine(String timesAndAmount) {
-        String[] auxArray = timesAndAmount.split(",");
-        String[] timeArray = auxArray[0].split("-");
-        Double amount = Double.valueOf(auxArray[1]);
+    private PayLine generatePayLine(String rawTimesAndAmount) {
+        String[] timesAndAmount = rawTimesAndAmount.split(",");
+        String[] startAndEndTimeArray = timesAndAmount[0].split("-");
+        Double amount = Double.valueOf(timesAndAmount[1]);
 
-        List<LocalTime> localTimeList = Arrays.stream(timeArray)
-            .flatMap(s -> {
-                String[] stringArray = s.split(":");
-                return Stream.of(LocalTime.of(Integer.parseInt(stringArray[0]), Integer.parseInt(stringArray[1])));
-            }).collect(Collectors.toList());
+        List<LocalTime> startAndEndTime = mapStartAndEndTime(startAndEndTimeArray);
 
-        return new PayLine(localTimeList.get(0), localTimeList.get(1), amount);
+        return new PayLine(startAndEndTime.get(0), startAndEndTime.get(1), amount);
     }
 
     private void updatePayLineMap(Day day, String[] fileLine, Map<Day, List<PayLine>> payLineMap) {
-        List<PayLine> payLineList;
+        List<PayLine> payLines;
         if (payLineMap.containsKey(day)) {
-            payLineList = payLineMap.get(day);
-            payLineList.add(generatePayLine(fileLine[1]));
+            payLines = payLineMap.get(day);
+            payLines.add(generatePayLine(fileLine[1]));
         } else {
-            payLineList = new ArrayList<>();
-            payLineList.add(generatePayLine(fileLine[1]));
-            payLineMap.put(day, payLineList);
+            payLines = new ArrayList<>();
+            payLines.add(generatePayLine(fileLine[1]));
+            payLineMap.put(day, payLines);
         }
     }
 
@@ -44,8 +39,8 @@ public class PayTableMapper {
             case CURRENCY_CODE:
                 currencyCode.set(fileLine[1]);
                 break;
-            case MON:
-                updatePayLineMap(Day.MON, fileLine, payLineMap);
+            case MO:
+                updatePayLineMap(Day.MO, fileLine, payLineMap);
                 break;
             case TU:
                 updatePayLineMap(Day.TU, fileLine, payLineMap);

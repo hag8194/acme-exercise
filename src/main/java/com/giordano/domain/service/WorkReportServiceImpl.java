@@ -16,7 +16,7 @@ public class WorkReportServiceImpl implements WorkReportService {
     }
 
     @Override
-    public List<PayReport> getPayReportList() {
+    public List<PayReport> getPayReports() {
         workReportRepository.getAllWorkReport();
         payTableRepository.getPayTable();
         return null;

@@ -17,7 +17,6 @@ public class WorkReportRepositoryImpl implements WorkReportRepository {
 
     @Override
     public List<WorkReport> getAllWorkReport() {
-        fileHandler.importWorkReportFile().forEach(System.out::println);
-        return null;
+        return workReportMapper.convert(fileHandler.importWorkReportFile());
     }
 }

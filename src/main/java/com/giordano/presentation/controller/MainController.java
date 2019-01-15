@@ -10,6 +10,6 @@ public class MainController {
     }
 
     public void generatePayReport() {
-        workReportService.getPayReportList();
+        workReportService.getPayReports();
     }
 }

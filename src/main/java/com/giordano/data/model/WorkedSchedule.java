@@ -7,9 +7,10 @@ public class WorkedSchedule {
     private LocalTime timeStart;
     private LocalTime timeEnd;
 
-    public WorkedSchedule(Day day, LocalTime timeStart) {
+    public WorkedSchedule(Day day, LocalTime timeStart, LocalTime timeEnd) {
         this.day = day;
         this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
     }
 
     public Day getDay() {
