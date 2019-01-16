@@ -3,6 +3,7 @@ package com.giordano.domain.service;
 import com.giordano.data.model.*;
 import com.giordano.data.repository.PayTableRepository;
 import com.giordano.data.repository.WorkReportRepository;
+import com.giordano.domain.exception.InvalidWorkReportsSizeException;
 import com.giordano.domain.model.PayReport;
 
 import java.time.LocalTime;
@@ -40,6 +41,14 @@ public class PayReportServiceImpl implements PayReportService {
             .orElse(null);
     }
 
+    private double getAmountToPay(LocalTime timeStart, LocalTime timeEnd, List<PayLine> payLines) {
+        PayLine payLine = getApplicablePayLine(timeStart, timeEnd, payLines);
+        double amount = 0.0;
+        if(Objects.nonNull(payLine))
+            amount = payLine.getAmount();
+        return amount;
+    }
+
     private List<PayReport> generatePayReports(List<WorkReport> workReports, PayTable payTable) {
         List<PayReport> payReports = new ArrayList<>();
         for (WorkReport workReport : workReports) {
@@ -51,22 +60,24 @@ public class PayReportServiceImpl implements PayReportService {
                 long workedHours = HOURS.between(timeStart, timeEnd);
 
                 List<PayLine> payLines = payTable.getPayLineMap().get(day);
-                PayLine payLine = getApplicablePayLine(timeStart, timeEnd, payLines);
-                double amount = 0.0;
+                double amountToPay = getAmountToPay(timeStart, timeEnd, payLines);
 
-                if(Objects.nonNull(payLine))
-                    amount = payLine.getAmount();
-
-                totalOfPay += workedHours * amount;
+                totalOfPay += workedHours * amountToPay;
             }
             payReports.add(new PayReport(workReport.getEmployeeName(), totalOfPay, payTable.getCurrencyCode()));
         }
         return payReports;
     }
 
+    private void validateWorkReportsSize(List<WorkReport> workReports) {
+        if(workReports.size() < 5)
+            throw new InvalidWorkReportsSizeException("Required at least five sets of data");
+    }
+
     @Override
     public List<PayReport> getAllPayReports() {
         List<WorkReport> workReports = workReportRepository.getAllWorkReport();
+        validateWorkReportsSize(workReports);
         PayTable payTable = payTableRepository.getPayTable();
         return generatePayReports(workReports, payTable);
     }

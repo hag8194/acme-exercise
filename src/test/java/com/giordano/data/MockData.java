@@ -95,6 +95,23 @@ public final class MockData {
         );
     }
 
+    public static List<WorkReport> getMockWorkReportsWithTwoItems() {
+        return Arrays.asList(
+            new WorkReport("RENE", Arrays.asList(
+                new WorkedSchedule(Day.MO, LocalTime.of(10, 0), LocalTime.of(12, 0)),
+                new WorkedSchedule(Day.TU, LocalTime.of(10, 0), LocalTime.of(12, 0)),
+                new WorkedSchedule(Day.TH, LocalTime.of(1, 0), LocalTime.of(3, 0)),
+                new WorkedSchedule(Day.SA, LocalTime.of(14, 0), LocalTime.of(18, 0)),
+                new WorkedSchedule(Day.SU, LocalTime.of(20, 0), LocalTime.of(21, 0))
+            )),
+            new WorkReport("ASTRID", Arrays.asList(
+                new WorkedSchedule(Day.MO, LocalTime.of(10, 0), LocalTime.of(12, 0)),
+                new WorkedSchedule(Day.TH, LocalTime.of(12, 0), LocalTime.of(14, 0)),
+                new WorkedSchedule(Day.SU, LocalTime.of(20, 0), LocalTime.of(21, 0))
+            ))
+        );
+    }
+
     private MockData() {
     }
 }
