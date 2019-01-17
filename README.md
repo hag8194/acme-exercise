@@ -5,7 +5,7 @@
 * JAVA_HOME enviroment variable pointing to JDK root dir
 ## How to run it
 ```
-.\mvnw install
+.\mvnw package
 cd target
 java -jar acme-exercise-1.0-SNAPSHOT.jar
 ```
