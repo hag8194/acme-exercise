@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/hag8194/acme-exercise.svg?branch=master)](https://travis-ci.com/hag8194/acme-exercise)
 # Acmee Exercise 
 
 ## Requirements
